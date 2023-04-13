@@ -9,6 +9,7 @@ class MemberModel(admin.ModelAdmin):
     readonly_fields = ('user','position','salary','work_hours')
 
     def get_readonly_fields(self,request,obj):
+        
         #get_user = User.objects.filter(is_superuser=True)
         #get_user = self.model.objects.all()
         get_user=self.model.objects.filter(test=True)
