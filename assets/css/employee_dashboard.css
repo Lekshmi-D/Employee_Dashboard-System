@@ -1,0 +1,121 @@
+body{
+    overflow-x: hidden;
+}
+
+/* top statistics box */
+
+.statbox_grid{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.main_body{
+    background-color: var(--gray-background);
+    height: 100vh;
+    position: relative;
+    left: 15vw;
+    width: 85vw;
+
+}
+
+#box1{
+    background-color: blue;
+}
+#box2{
+    background-color: green;
+}
+#box3{
+    background-color: rgb(225, 225, 0);
+}
+#box4{
+    background-color: red;
+}
+
+.stat_box{
+    
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 15vw;
+    height: 15vw;
+    margin: 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+.number{
+    font-size: 2rem;
+    margin-top: 20px;
+}
+
+/* top statistics box end */
+
+/* tasklist  */
+
+
+/* .tabs{ */
+    /* background-color: rgb(0, 29, 107); */
+    /* height: 10vh; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+/* } */
+/*  */
+/* .tab{ */
+    /* color: white; */
+    /* background-color: rgb(0, 0, 255); */
+    /* padding: 20px; */
+    /* margin: 10px; */
+/* } */
+
+
+.tasks{
+    height: 60vh;
+    width: 85vw;
+    /* background-color: rgb(173, 0, 0); */
+}
+
+#completed{
+    display: none  ;
+}
+
+
+.tasklist{
+    width: 85vw;
+    height: 100%;
+    background-color: var(--gray-background);
+    overflow-y: scroll;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: flex-start; */
+    /* align-items: center; */
+    
+}
+
+.singleTask{
+    background-color: rgb(253, 253, 253);
+    height: 30vh;
+    width: 60vw;
+    margin: 20px;
+    margin-left: 50%;
+    transform: translate(-50%);
+    box-shadow: var(--shadow1);
+    border: 2px solid rgb(76, 0, 255);
+    
+}
+
+.status{
+    display: none;
+
+}
+
+.confirm{
+    display: none;
+}
+
+
+/* taskslist end */

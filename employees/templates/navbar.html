@@ -1,0 +1,49 @@
+
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+<button class="show_navbar">show</button>
+
+<div class="navbar">
+
+    <button class="close">close</button>
+
+    <div class="menu_overall">
+
+        <button class="drop_down_menu_button">...</button>
+        <div class="menu">
+            <ul>
+                <li id = "signout" > <a href="/signout">SIGN OUT</a>  </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="profile">
+
+        <img src="{% static 'res/profile.png' %}" alt="profile_pic" class="profile_pic">
+        <span class="username"></span>
+
+    </div>
+
+    <div class="links">
+
+        <ul>
+            <li><a href="assigned"> <img src="" alt="icon" class="icon"> <span class="link-text">Assigned</span></a></li>
+            <li><a href="completed">  <img src="" alt="icon" class="icon"> <span class="link-text">Completed</span></a></li>
+            <li><a href="in_progress">  <img src="" alt="icon" class="icon"> <span class="link-text">In Progress</span></a></li>
+            <li><a href="pending">  <img src="" alt="icon" class="icon"> <span class="link-text">Pending</span></a></li>
+        </ul>
+
+    </div>
+
+    <div class="logo"></div>
+
+</div>
+
+<script src="{% static 'js/navbar.js' %}"></script>
+
+

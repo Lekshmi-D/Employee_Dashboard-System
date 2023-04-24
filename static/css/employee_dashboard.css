@@ -1,0 +1,75 @@
+.tasklist{
+    width: 85vw;
+    height: 100%;
+    background-color: var(--gray-background);
+    overflow-y: scroll;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: flex-start; */
+    /* align-items: center; */
+    
+}
+
+.singleTask{
+    background-color: rgb(253, 253, 253);
+    height: 30vh;
+    width: 60vw;
+    margin: 20px;
+    margin-left: 50%;
+    transform: translate(-50%);
+    box-shadow: var(--shadow3);
+    border: 1px solid rgb(76, 0, 255);
+    transition: 0.5s;
+    
+}
+
+.status{
+    display: none;
+
+}
+
+.confirm{
+    display: none;
+}
+
+.title{
+    font-family: sans-serif;
+
+}
+
+/* taskslist end */
+
+
+.viewTask{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 40vh;
+    width: 40vw;
+    background-color: rgb(240, 240, 240);
+    box-shadow: var(--shadow2);
+    z-index: 100;
+    display: none;
+    font-family: sans-serif;
+    color: rgb(0, 0, 0);
+
+}
+
+.viewTask h3{
+    /* background-color: red; */
+    width: 80%;
+    margin: 10px 10px;
+}
+
+.viewTask p {
+    padding: 10px;
+    height: 40%;
+    width: 80%;
+    /* background-color: red; */
+    border: 1px solid black;
+}

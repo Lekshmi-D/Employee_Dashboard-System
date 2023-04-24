@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <title>SIGN IN</title>
+
+</head>
+<body>
+
+    
+
+    <div class="signin">
+
+        <h2>SIGN IN</h2>
+
+        <form action="/" method="POST"> 
+
+            <h4 class = "warning">{{warning}}</h4>
+
+            {% csrf_token %}
+
+            <select name="type" id="member_type">
+                <option value="employee">Employee</option>
+                <option value="manager">Manager</option>
+            </select>
+
+            <input type="text" name = "username" placeholder="username">
+            <input type="password" name = "password" placeholder="password">
+
+            <input type="submit" value = "SIGN IN" class = "sign_in_button">
+
+        </form>
+
+    </div>
+    
+</body>
+</html>
