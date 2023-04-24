@@ -1,0 +1,155 @@
+
+*{
+    padding: 0px;
+    margin: 0px;
+}
+/* navbar  start*/
+
+.navbar{
+    width: 15vw;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    transition: 0.5s;
+    overflow: hidden;
+    
+}
+
+.links ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+    left: 0px;
+    
+    
+}
+
+.icon{
+    padding: 0px 10px;
+}
+
+.links ul li{
+    padding: 20px;
+    /* background-color: blue; */
+    width: min-content;
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+}
+.links ul li a{
+    text-decoration: none;
+    color: white;
+    font-family: sans-serif;
+}
+
+
+.profile{
+    /* background-color: green; */
+    height: 40%;
+    width: 100%;
+    position: relative;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile img{
+    height: same-as-height;
+    width: 60%;
+}
+
+.show_navbar{
+    display: none;
+}
+
+.close{
+    display: none;
+}
+
+.menu_overall{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    
+   
+    /* position: fixed; */
+    /* top: 20px; */
+}
+
+.menu{
+    background-color: rgb(69, 69, 69);
+    display: none;
+    height: 10vh;
+    width: max-content;
+    position: fixed;
+    top: 50px;
+    left: 15vw;
+    transform: translate(-100%);
+
+    /* padding: 40px 20px; */
+}
+
+.drop_down_menu_button{
+    width: 5vw;
+    float: right;
+    background-color: transparent;
+    font-size: 25px;
+    border: 0px;
+    color: white;
+    position: relative;
+    right: 0px;
+}
+
+.menu ul {
+    list-style: none;
+    width: max-content;
+}
+
+.menu ul li{
+    font-size: 12px;
+    /* width: 100%; */
+    padding: 20px;
+    height: 10px;
+}
+
+.menu ul li:hover{
+    background-color: rgb(153, 153, 153);
+}
+
+
+@media( max-width: 100vh){  
+
+    .navbar{
+        
+        left: -50vw;
+        width: 50vw;
+    }
+
+    .profile{
+        height: 20%;
+    }
+
+    .link-text{
+        display: none;
+    }
+
+    .show_navbar{
+        display: flex;
+    }
+    .close{
+        display: flex;
+    }
+
+}
+
+/* navbar end  */

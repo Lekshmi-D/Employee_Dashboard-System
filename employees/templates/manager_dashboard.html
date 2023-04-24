@@ -1,0 +1,151 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/manager_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <title>Employee DashBoard</title>
+</head>
+<body>
+    {% include  'navbar.html'  %}
+
+
+    <div class="main_body">
+
+        
+        <div class="statbox_grid">
+            
+            <div class="stat_box" id = "box1">
+                
+                <span class = "title" >ASSIGNED</span>
+                <span class = "number" >67</span>
+                
+            </div>     
+            <div class="stat_box" id="box2">
+                <span class = "title" >COMPLETED</span>
+                <span class = "number" >67</span>
+            </div>    
+            <div class="stat_box" id="box3">
+                <span class = "title" >IN PROGRESS</span>
+                <span class = "number" >67</span>
+            </div>
+            <div class="stat_box" id = "box4">
+                <span class = "title" >PENDING</span>
+                <span class = "number" >67</span>
+            </div>
+            
+        </div>
+
+        
+       
+       
+        
+        <div class="new_task">
+
+            <button class="close_task_create">close</button>
+            
+            <form action="">
+
+                <input type="text" class="task_title" placeholder="title">
+                <input type="text" class = "assigned_to" placeholder="assigned to">
+                <input type="date" class="date" data-date-format="yyyy-mm-dd">
+                
+                <textarea type="text" class="description" rows = 10  >  </textarea>
+
+                <button class = "create_task_submit">CREATE</button>
+
+            </form>
+
+        </div>
+
+    
+        <div class="tasks">
+
+            <button id="createTask">CREATE TASK </button>
+
+
+            <div class="tasklist" id = "pending">
+
+                {% for task in tasks %}
+
+                <div class="singleTask" id =  "{{task.id}}" >
+
+                    {% if task.status == 'assigned' %}
+
+                    <input type="text" class = "status" value= "assigned">
+
+                    {% elif task.status == 'in_progress' %}
+
+                    <input type="text" class = "status" value= "in_progress">
+
+                    {% elif task.status == 'completed' %}
+
+                    <input type="text" class = "status" value= "completed">
+
+                    {% endif %}
+
+                    <h3 class = "title" >{{ task.title }}</h3>
+
+                    <h3 class = "date">{{ task.due_date }}</h3>
+
+                    <h3 class = "assigned_to"> {{task.assigned_to}}</h3>
+  
+                    <form action="" >
+
+                        {% csrf_token %}
+
+                        <!-- <select name="" class ="select_status" value = "{{task.status}}" > -->
+<!--  -->
+                            <!-- {% if task.status == 'assigned' %} -->
+                            <!-- <option value="assigned" selected >Assigned</option> -->
+                            <!-- <option value="in_progress">In Progress</option> -->
+                            <!-- <option value="completed">Completed</option> -->
+<!--  -->
+                            <!-- {% elif task.status == 'in_progress' %} -->
+                            <!-- <option value="assigned"  >Assigned</option> -->
+                            <!-- <option value="in_progress" selected>In Progress</option> -->
+                            <!-- <option value="completed">Completed</option> -->
+<!--  -->
+                            <!-- {% elif task.status == 'completed' %} -->
+                            <!-- <option value="assigned"  >Assigned</option> -->
+                            <!-- <option value="in_progress" >In Progress</option> -->
+                            <!-- <option value="completed" selected>Completed</option> -->
+<!--  -->
+                            <!-- {% endif %} -->
+<!--  -->
+<!--  -->
+<!--  -->
+                        <!-- </select> -->
+                        {% if task.status == 'assigned' %}
+                        <h3 class="status_shower">ASSIGNED</h3>
+                        {% elif task.status == 'in_progress' %}
+                        <h3 class="status_shower">IN PROGRESS</h3>
+                        {% elif task.status == 'completed' %}
+                        <h3 class="status_shower">COMPLETED</h3>
+                        {% endif %}
+
+                        <button class="confirm">confirm</button>
+
+                    </form>
+                    
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+        
+
+    <script src = "{% static 'js/manager_dashboard.js' %}" ></script>
+    </body>
+    </html>

@@ -1,0 +1,92 @@
+
+
+
+
+
+
+.status{
+    display: none;
+
+}
+
+.confirm{
+    display: none;
+}
+
+.title{
+    font-family: sans-serif;
+
+}
+
+.status_shower{
+    font-family: sans-serif;
+    /* color: red; */
+
+}
+
+/* taskslist end */
+
+
+/* new task */
+
+.new_task{
+    position: fixed;
+    height: max-content;
+    width: 50vw;
+    background-color: white;
+    box-shadow: var(--shadow1);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    padding: 20px;
+    border: 2px solid black;
+    display: none;
+}
+
+.new_task form{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    
+
+}
+
+.description{
+    padding: 5px;
+}
+
+.new_task form input {
+    margin: 10px;
+    padding: 10px;
+}
+
+#create_task_submit{
+    background-color: blue;
+    color: white;
+    border: 0px;
+    padding: 10px 10px;
+    margin: 20px 0px;
+
+}
+
+.close_task_create{
+    width: min-content;
+   
+   
+   
+}
+
+#createTask{
+    background-color: blue;
+    color: white;
+    padding: 15px;
+    transform: translate(-59%);
+    border: 0px;
+    shape-outside: var(--shadow1);
+    margin-left: 50%;
+    margin-bottom: 20px;
+}
+
