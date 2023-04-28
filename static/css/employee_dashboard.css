@@ -20,7 +20,16 @@
     box-shadow: var(--shadow3);
     border: 1px solid rgb(76, 0, 255);
     transition: 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
+}
+
+.singleTask > *{
+    width: 25%;
+    /* background-color: red; */
+    text-align: center;
 }
 
 .status{
@@ -49,9 +58,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 40vh;
-    width: 40vw;
-    background-color: rgb(240, 240, 240);
+    height: 70vh;
+    width: 60vw;
+    background-color: rgb(255, 255, 255);
     box-shadow: var(--shadow2);
     z-index: 100;
     display: none;
@@ -72,4 +81,26 @@
     width: 80%;
     /* background-color: red; */
     border: 1px solid black;
+}
+.description{
+    display: none;
+    margin-top: 20px;
+}
+
+.close_task_view{
+    /* background-color: tran; */
+    background-color: transparent;
+    border: 0px;
+    margin-left: auto;
+    margin-right: 10%;
+
+
+}
+
+.close_task_view img{
+    width: 15px;
+    height: 15px;
+    
+    
+    /* background-color: red; */
 }

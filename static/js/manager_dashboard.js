@@ -39,21 +39,6 @@ const tasks = document.getElementsByClassName("singleTask");
 
 console.log("hello world")
 
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
 
 Array.from(tasks).forEach((element) => {
 
@@ -110,6 +95,13 @@ create_task_submit.addEventListener("click" , (event)=>{
     }).then((data)=>{
         console.log(data);
         create_task_box.style.display = "none";
+
+        new_single_task = tasks[0].cloneNode(true);
+        new_single_task.getElementsByClassName("title")[0].innerText = document.querySelector(".task_title").value; 
+        new_single_task.getElementsByClassName("date")[0].innerText = document.querySelector(".date").value; 
+        new_single_task.getElementsByClassName("status")[0].innerText = "assigned"; 
+
+        document.querySelector(".tasklist").prepend(new_single_task);
         
     } )
     

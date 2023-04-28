@@ -36,4 +36,9 @@ class Task(models.Model):
     ))
   assigned_to = models.ForeignKey(Member, on_delete=models.CASCADE)
 
-  assigned_by = models.ForeignKey(Managers , on_delete=models.CASCADE, default = "", null = True)
+  assigned_by = models.ForeignKey(Managers , on_delete=models.CASCADE, default = "")
+  assigned_date = models.DateField(default="2023-2-4", null = True)
+  completed_date = models.DateField(default= None , null = True)
+  manager_approved = models.BooleanField(default =  False )
+
+
