@@ -18,31 +18,61 @@
 
     <div class="main_body">
 
+        <!-- some hidden variables -->
+
+        <input type="hidden" value="">
+
         
         <div class="statbox_grid">
             
             <div class="stat_box" id = "box1">
                 
                 <span class = "title" >ASSIGNED</span>
-                <span class = "number" >67</span>
+                <span class = "number" >{{assigned_count}}</span>
                 
             </div>     
             <div class="stat_box" id="box2">
                 <span class = "title" >COMPLETED</span>
-                <span class = "number" >67</span>
+                <span class = "number" >{{completed_count}}</span>
             </div>    
             <div class="stat_box" id="box3">
                 <span class = "title" >IN PROGRESS</span>
-                <span class = "number" >67</span>
+                <span class = "number" >{{in_progress_count}}</span>
             </div>
             <div class="stat_box" id = "box4">
                 <span class = "title" >PENDING</span>
-                <span class = "number" >67</span>
+                <span class = "number" >{{pending_count}}</span>
             </div>
             
         </div>
 
+        <h1 class = "page_heading">{{currentTitle}}</h1>
+
+        <div class="changePassword">
+
+            <button id="close_change_passwod"> 
+                <img src="{% static 'res/close-button.png' %}" alt="">
+            </button>
+
+            <h2>CHANGE PASSWORD</h2>
+
+            <h4 id ="change_password_warning"></h4>
+
+            <input type="text" id = "real_password" placeholder="current password">
+            <input type="text" id = "new_password" placeholder = "new password">
+            <input type="text" id = "new_password2" placeholder="re-enter new password">
+
+            <button id="change_password_button">CHANGE</button>
+
+        </div>
+
         <div class="viewTask">
+
+            <button class="close_task_view">
+
+                <img src="{% static 'res/close-button.png' %}" alt="" class = "close_button">
+
+            </button>
 
             <h3 class="task_title"></h3>
             <h3 class="task_due_date"></h3>
@@ -118,7 +148,7 @@
                     </form>
 
                     <h3 class="due_date">{{task.due_date}}</h3>
-                    <h3 class="assigned_by">{{task.assigned_by}}</h3>
+                    <h3 class="assigned_by">{{task.assigned_by.username}}</h3>
                     <h3 class="description">{{task.description}}</h3>
                     
 

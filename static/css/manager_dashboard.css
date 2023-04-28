@@ -1,6 +1,11 @@
 
 
-
+.singleTask{
+    display: flex;
+    flex-direction: column;
+    /* align-items: f; */
+    padding: 5%;
+}
 
 
 
@@ -74,9 +79,15 @@
 
 .close_task_create{
     width: min-content;
-   
-   
-   
+    background-color: transparent;
+    border: 0px;
+    margin-left: auto;
+
+}
+
+.close_task_create img{
+    width: 15px;
+    height: 15px;
 }
 
 #createTask{
@@ -89,4 +100,42 @@
     margin-left: 50%;
     margin-bottom: 20px;
 }
+
+#new{
+    
+    
+    
+    width: 80%;
+    margin-bottom: 30px;
+    /* margin-left: auto; */
+
+  
+
+}
+#new span{
+    width: min-content;
+
+    background-color: rgb(85, 246, 85);
+    padding: 7px;
+    font-family: sans-serif;
+}
+
+.details{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    /* background-color: red; */
+    
+
+}
+
+.details > *{
+    width: 30%;
+    margin: 20px;
+}
+
+.assigned_to{
+    font-family: sans-serif;
+}
+
 

@@ -37,24 +37,32 @@ def employees(request, username, status = "assigned"):
 
         print("the status is " , status)
 
+        assigned = Task.objects.all().filter( assigned_to = user_id )
+        in_progress = Task.objects.all().filter( assigned_to = user_id, status = "in_progress")
+        pending = Task.objects.all().filter( assigned_to = user_id , due_date__lt = datetime.today()  ).exclude( status = "completed" )
+        completed = Task.objects.all().filter( assigned_to = user_id , status = "completed"  ).order_by("-completed_date")
+
+
+        user_data = {"username" : request.session["user_data"]["username"] , "type": "employee"}
+
         if status == "assigned":
-            tasks =  Task.objects.all().filter( assigned_to = user_id)
-            
-            # tasks = Task.objects.raw(f"select employees_task.id , title , due_date , description , employees_managers.username from employees_task , employees_managers where employees_task.assigned_to = {user_id} and status = 'assigned' and employees_task.assigned_by = employees_managers.id"  )
-            print("the tasks are ", tasks[0].assigned_by.username)
+            currentTitle = "Assigned"
+            tasks = list(assigned)
 
         elif status == "in_progress":
-            tasks =  Task.objects.filter( assigned_to = user_id , status = "in_progress").values()
+            currentTitle = "In Progress"
+            tasks =  list(in_progress)
         elif status == "pending":
+            currentTitle = "Pending"
+            tasks = list(pending)
             # date = datetime.today().strftime('%Y-%m-%d')
-            tasks =  Task.objects.filter( assigned_by = user_id , due_date__lt = datetime.today()  ).values()
             # print(date, tasks)
         elif status == "completed":
-            tasks =  Task.objects.filter( assigned_to = user_id , status = "completed").values()
+            currentTitle = "Completed"
+            tasks = list(completed)
+        return render(request, "employee_dashboard.html" , {"tasks": tasks , "data": data  , "assigned_count":len(assigned) , "in_progress_count": len(in_progress) , "pending_count": len(pending) , "completed_count": len(completed) , "user_data": user_data , "currentTitle" : currentTitle })
         
-        print(tasks)
 
-        return render(request, "employee_dashboard.html" , {"tasks": list(tasks) , "data": data })
     else:
         return redirect("/")
 
@@ -64,22 +72,38 @@ def manager(request , username , status = "assigned"):
         data = Managers.objects.filter( username = username ).values()[0]
         user_id = data['id']
 
+        assigned = Task.objects.all().filter( assigned_by = user_id )
+        in_progress = Task.objects.all().filter( assigned_by = user_id , status = "in_progress")
+        pending = Task.objects.all().filter( assigned_by = user_id , due_date__lt = datetime.today()   )
+        completed = Task.objects.all().filter( assigned_by = user_id , due_date__lt = datetime.today() , status = "completed" )
+
+        new_tasks = Task.objects.all().filter(status = "completed" , manager_approved =  False)
+
+        print("status is" , status)
 
         if status == "assigned":
-            tasks =  Task.objects.filter( assigned_by = user_id).values()
-            # tasks = Task.objects.raw("select * from employees_task , emplo")
+            tasks =  list(assigned)
+            currentTitle = "Assigned"
+     
         elif status == "in_progress":
-            tasks =  Task.objects.filter( assigned_by = user_id , status = "in_progress").values()
+            currentTitle = "In Progress"
+            tasks = list(in_progress)
+
         elif status == "pending":
-            # sdate = datetime.today().strptime("%Y-%m-%d")
-            # sprint(date)
-            # sprint(Task.objects.filter(assigned_by  = user_id).values())
-            tasks =  Task.objects.filter( assigned_by = user_id , due_date__lt = datetime.today()  ).values()
+            currentTitle = "Pending"
+            tasks = list(pending)
 
         elif status == "completed":
-            tasks =  Task.objects.filter( assigned_by = user_id , status = "completed").values() 
+            Task.objects.filter(status = "completed" ).update(manager_approved = True)
+            print("changed manager verification")
+            currentTitle = "Completed"
+            tasks = list(completed)
 
-        return render(request, "manager_dashboard.html" , {"tasks": list(tasks) , "data": data })
+        print(tasks)
+
+
+        return render(request, "manager_dashboard.html" , {"tasks": tasks , "data": data  , "assigned_count":len(assigned) , "in_progress_count": len(in_progress) , "pending_count": len(pending) , "completed_count": len(completed) , "currentTitle" :currentTitle , "status": status, "new_task_count": len(new_tasks) }, )
+        
     else:
         return HttpResponse("not signed in")
     
@@ -118,9 +142,7 @@ def manager_operations(request):
     else:
         return HttpResponse("not done")
 
-
-
-def operations(request):
+def employee_operations(request):
     
     # print( request.session["user_data"]["username"])
     # data = json.load(request, "employee")
@@ -130,53 +152,29 @@ def operations(request):
     username = request.session["user_data"]["username"]
     print("22the username is " , username)
     if verifyUser(request, username , "employee"):
-        print( "status is " , data['status'])
-        Task.objects.filter(id =  data["id"]).update( status = data['status'])
-        print("here")
-        # Task.objects.get(id =  data["id"])
-        # Task.status =   data['status']
-        # Task.save()
-        return HttpResponse("done")
+
+        type = data["type"]
+
+        if type == "update":
+
+            status =  data["status"]
+            if status == "completed":
+                Task.objects.filter(id =  data["id"]).update( status = data['status'] , completed_date = datetime.today())
+            elif status == "assigned" or status == "in_progress":
+                Task.objects.filter(id =  data["id"]).update( status = data['status'] , completed_date = None , manager_approved =  False)
+
+            print( "status is " , data['status'])
+            print("here")
+            return HttpResponse("done")
+        
+
     return HttpResponse("not done")
 
+def operations(request):
+    data = json.load(request)
+    if verifyUser(request , request.session["user_data"]["username"] , data["type"] ):
+        pass
 
 
-'''def index(request):
-    labels=[]     #for names
-    data=[]       #for salary
-
-    queryset=Member.objects.order_by('-salary')[:5]
-    for person in queryset:
-        labels.append(person.firstname)
-        data.append(person.salary)
-
-    return render(request,'index.html',{
-        'labels':labels,
-        'data': data
-    })'''
-
-
-class MemberChart(TemplateView):
-    template_name = 'charts.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["qs"] = Member.objects.all()
-        return context
-
-@login_required()
-def task_list(request):                        #to display the task
-    tasks = Task.objects.filter(assigned_to=request.user)
-    return render(request, 'task_list.html', {'tasks': tasks})
-
-@login_required
-def update_task(request, pk):                 #to update status of a task
-    task = get_object_or_404(Task, pk=pk, assigned_to=request.user)
-    if request.method == 'POST':
-        task.status = request.POST.get('status')
-        task.save()
-        return redirect('task_list')
-    return render(request, 'update_task.html', {'task': task})
-# Create your views here.
 
 

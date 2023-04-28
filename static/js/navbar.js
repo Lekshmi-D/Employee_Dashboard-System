@@ -7,6 +7,8 @@ const menu_container = document.querySelector(".menu_overall");
 
 const menu = document.querySelector(".menu");
 
+
+
 document.addEventListener("click" , (event)=>{
     if(!menu_container.contains(event.target)){
         menu.removeAttribute("style");
