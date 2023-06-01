@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{% static 'css/statistics.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        var total = parseInt("{{all_tasks_count}}");
+        var in_progress = parseInt("{{in_progress_count}}");
+        var completed = parseInt("{{completed_count}}") ;
+        var pending = parseInt("{{pending_count}}") ;
+
+
+    </script>
+
+    {% include 'navbar.html' %}
+
+    <div class="main_body">
+
+        {% include 'stat_box.html' %}
+        
+        <div id ="charts">
+
+            <canvas id="pie_chart"></canvas>
+            <canvas id="bar_chart"></canvas>
+            
+        </div>
+        
+    </div>
+        
+    <script src="/static/js/statistics.js"></script>
+
+</body>
+
+</html>

@@ -22,29 +22,7 @@
 
         <input type="hidden" value="">
 
-        
-        <div class="statbox_grid">
-            
-            <div class="stat_box" id = "box1">
-                
-                <span class = "title" >ASSIGNED</span>
-                <span class = "number" >{{assigned_count}}</span>
-                
-            </div>     
-            <div class="stat_box" id="box2">
-                <span class = "title" >COMPLETED</span>
-                <span class = "number" >{{completed_count}}</span>
-            </div>    
-            <div class="stat_box" id="box3">
-                <span class = "title" >IN PROGRESS</span>
-                <span class = "number" >{{in_progress_count}}</span>
-            </div>
-            <div class="stat_box" id = "box4">
-                <span class = "title" >PENDING</span>
-                <span class = "number" >{{pending_count}}</span>
-            </div>
-            
-        </div>
+        {% include 'stat_box.html' %}
 
         <h1 class = "page_heading">{{currentTitle}}</h1>
 
@@ -75,6 +53,7 @@
             </button>
 
             <h3 class="task_title"></h3>
+            <h3 class="task_assigned_date"></h3>
             <h3 class="task_due_date"></h3>
             <h3 class="task_assigned_by"></h3>
             <h3 class="task_status"></h3>
@@ -146,7 +125,9 @@
                         <button class="confirm">confirm</button>
 
                     </form>
-
+                    
+                    
+                    <h3 class="assigned_date" style="display: none;">{{task.assigned_date}}</h3>
                     <h3 class="due_date">{{task.due_date}}</h3>
                     <h3 class="assigned_by">{{task.assigned_by.username}}</h3>
                     <h3 class="description">{{task.description}}</h3>

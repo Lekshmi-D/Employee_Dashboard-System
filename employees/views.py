@@ -28,7 +28,7 @@ def verifyUser(request, username, user_type):
     return False
 
 
-def employees(request, username, status = "assigned"):
+def employees(request, username, status = "all_tasks"):
 
     if verifyUser(request, username, "employee"):
 
@@ -37,17 +37,24 @@ def employees(request, username, status = "assigned"):
 
         print("the status is " , status)
 
-        assigned = Task.objects.all().filter( assigned_to = user_id )
+        all_tasks = Task.objects.all().filter( assigned_to = user_id ).order_by("-assigned_date")
+        assigned = Task.objects.all().filter( assigned_to = user_id , status = "assigned").order_by("-assigned_date")
         in_progress = Task.objects.all().filter( assigned_to = user_id, status = "in_progress")
         pending = Task.objects.all().filter( assigned_to = user_id , due_date__lt = datetime.today()  ).exclude( status = "completed" )
         completed = Task.objects.all().filter( assigned_to = user_id , status = "completed"  ).order_by("-completed_date")
 
+        for item in assigned.values():
+            print(item["assigned_date"])
 
         user_data = {"username" : request.session["user_data"]["username"] , "type": "employee"}
 
-        if status == "assigned":
-            currentTitle = "Assigned"
+        if status == "all_tasks":
+            currentTitle = "All Tasks"
+            tasks = list(all_tasks)
+
+        elif status == "assigned":
             tasks = list(assigned)
+            currentTitle = "Assigned"
 
         elif status == "in_progress":
             currentTitle = "In Progress"
@@ -60,29 +67,35 @@ def employees(request, username, status = "assigned"):
         elif status == "completed":
             currentTitle = "Completed"
             tasks = list(completed)
-        return render(request, "employee_dashboard.html" , {"tasks": tasks , "data": data  , "assigned_count":len(assigned) , "in_progress_count": len(in_progress) , "pending_count": len(pending) , "completed_count": len(completed) , "user_data": user_data , "currentTitle" : currentTitle })
+        return render(request, "employee_dashboard.html" , {"tasks": tasks , "data": data ,  "all_tasks_count":len(all_tasks) , "assigned_count":len(assigned) , "in_progress_count": len(in_progress) , "pending_count": len(pending) , "completed_count": len(completed) , "user_data": user_data , "currentTitle" : currentTitle , type :"manager"})
         
 
     else:
         return redirect("/")
 
-def manager(request , username , status = "assigned"):
+def manager(request , username , status = "all_tasks"):
     print("manager fuction")
     if verifyUser(request , username, "manager"):
         data = Managers.objects.filter( username = username ).values()[0]
         user_id = data['id']
 
-        assigned = Task.objects.all().filter( assigned_by = user_id )
+        all_tasks = Task.objects.all().filter( assigned_by = user_id ).order_by("-assigned_date")
+        assigned = Task.objects.all().filter( assigned_by = user_id  , status = "assigned" ).order_by("-assigned_date")
+        
         in_progress = Task.objects.all().filter( assigned_by = user_id , status = "in_progress")
         pending = Task.objects.all().filter( assigned_by = user_id , due_date__lt = datetime.today()   )
-        completed = Task.objects.all().filter( assigned_by = user_id , due_date__lt = datetime.today() , status = "completed" )
+        completed = Task.objects.all().filter( assigned_by = user_id  , status = "completed" )
 
         new_tasks = Task.objects.all().filter(status = "completed" , manager_approved =  False)
 
         print("status is" , status)
 
-        if status == "assigned":
-            tasks =  list(assigned)
+        if status == "all_tasks":
+            tasks =  list(all_tasks)
+            currentTitle = "All Tasks"
+
+        elif status == "assigned":
+            tasks = list(assigned)
             currentTitle = "Assigned"
      
         elif status == "in_progress":
@@ -98,11 +111,13 @@ def manager(request , username , status = "assigned"):
             print("changed manager verification")
             currentTitle = "Completed"
             tasks = list(completed)
+        elif status == "statistics":
+            return render(request , "statistics.html" ,  { "data": data  , "all_tasks_count":len(all_tasks) ,   "assigned_count":len(assigned) , "in_progress_count": len(in_progress) , "pending_count": len(pending) , "completed_count": len(completed)  , "status": status, "new_task_count": len(new_tasks) ,  "type":"manager" },   )
 
-        print(tasks)
+        # print(tasks)
 
 
-        return render(request, "manager_dashboard.html" , {"tasks": tasks , "data": data  , "assigned_count":len(assigned) , "in_progress_count": len(in_progress) , "pending_count": len(pending) , "completed_count": len(completed) , "currentTitle" :currentTitle , "status": status, "new_task_count": len(new_tasks) }, )
+        return render(request, "manager_dashboard.html" , {"tasks": tasks , "all_tasks_count":len(all_tasks) , "data": data  ,  "assigned_count":len(assigned) , "in_progress_count": len(in_progress) , "pending_count": len(pending) , "completed_count": len(completed) , "currentTitle" :currentTitle , "status": status, "new_task_count": len(new_tasks) , "type":"manager" }, )
         
     else:
         return HttpResponse("not signed in")

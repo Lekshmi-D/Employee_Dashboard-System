@@ -57,8 +57,9 @@ Array.from(tasks).forEach((element) => {
             console.log("showing");
 
             // taskView.style.display = "flex";
-            console.log(element.getElementsByClassName("title")[0].textContent);
+            console.log(element.getElementsByClassName("assigned_date")[0].textContent);
             taskView.getElementsByClassName("task_title")[0].textContent = `Title:       ${element.getElementsByClassName("title")[0].textContent}`;
+            taskView.getElementsByClassName("task_assigned_date")[0].textContent = `Assigned:       ${element.getElementsByClassName("assigned_date")[0].textContent}`;
             taskView.getElementsByClassName("task_due_date")[0].textContent = `Due:         ${element.getElementsByClassName("due_date")[0].textContent}`;
             taskView.getElementsByClassName("task_assigned_by")[0].textContent = `assigned by: ${element.getElementsByClassName("assigned_by")[0].textContent}`;
             taskView.getElementsByClassName("task_status")[0].textContent = `status       ${element.getElementsByClassName("select_status")[0].value}`;

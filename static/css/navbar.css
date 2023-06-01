@@ -19,9 +19,15 @@
     left: 0px;
     transition: 0.5s;
     overflow: hidden;
+    z-index: 100;
+
    
     
 }
+
+/* .navbar *{ */
+    /* z-index: 100; */
+/* } */
 
 .links ul {
     list-style: none;
@@ -48,9 +54,15 @@
     align-items: center;
     justify-content: center;
     width: max-content;
-    ;
+    /* background-color: red; */
+    
+
     /* background-color: blue; */
 }
+
+
+
+
 .links ul li :hover{
     /* background-color: white; */
     /* padding: 20px; */
@@ -80,12 +92,40 @@
     width: 60%;
 }
 
-.show_navbar{
-    display: none;
-}
+
+
+
 
 .close{
     display: none;
+    width: 5%;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+    border: 0px;
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+.close img{
+    height: 100%;
+    width: 100%;
+
+}
+
+.show_navbar{
+    /* position: absolute; */
+    display: none;
+    top: 30px;
+    left: 30px;
+    width: 7vw;
+    height: 7vw;
+    background-color: transparent;
+    border: 0px;
+}
+
+.show_navbar img{
+    height: 100%;
+    width: 100%;
 }
 
 .menu_overall{
@@ -177,21 +217,61 @@
         
         left: -50vw;
         width: 50vw;
+        height: 100vh;
+        /* background-color: red; */
+        z-index: 100;
+      
     }
+    
 
     .profile{
         height: 20%;
     }
 
-    .link-text{
-        display: none;
-    }
+    /* .link-text{ */
+        /* display: none; */
+    /* } */
 
     .show_navbar{
         display: flex;
     }
     .close{
         display: flex;
+    }
+   
+   
+   
+
+   
+
+    
+
+    .drop_down_menu_button{
+        position: relative;
+        
+        
+        /* background-color: red; */
+        display: flex;
+        flex-direction: column;
+        align-items: right;
+        transform: translateX(0p)
+        
+    }
+
+    .menu_overall{
+        position: absolute;
+        top: 10px;
+        left: 0px;
+        /* background-color: blue; */
+        height: max-content;
+        width: max-content;
+    }
+    .menu{
+        position: relative;
+        width: min-content;
+        top: 20px;
+        /* left: 50%; */
+        transform: translateX(-40%);
     }
 
 }

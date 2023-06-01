@@ -4,11 +4,15 @@
 
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 
-<button class="show_navbar">show</button>
+<button class="show_navbar">
+    <img src="/static/res/menu.png" alt="">
+</button>
 
 <div class="navbar">
 
-    <button class="close">close</button>
+    <button class="close">
+        <img src="/static/res/close_button_white.png" alt="">
+    </button>
 
     <div class="menu_overall">
 
@@ -16,7 +20,7 @@
         <div class="menu">
             <ul>
                 <li id = "signout" > <a href="/signout">SIGN OUT</a>  </li>
-                <li > <span id = "change_password" >CHANGE PASSWORD</span>  </li>
+                <!-- <li > <span id = "change_password" >CHANGE PASSWORD</span>  </li> -->
             </ul>
 
         </div>
@@ -33,10 +37,16 @@
     <div class="links">
 
         <ul>
+
+            {% if type == "manager" %}
+     
+            <li><a href="statistics">  <span class="link-text">Statistics</span></a></li>
+            {% endif %}
+            <li><a href="all_tasks">  <span class="link-text">All Tasks</span></a></li>
             <li><a href="assigned">  <span class="link-text">Assigned</span></a></li>
-            <li><a href="completed">  <span class="link-text">Completed</span> </span></a> <span id="new_completed_works">0</span></li>
+            <li><a href="completed">  <span class="link-text">Completed</span> </span></a> <span id="new_completed_works"></span></li>
             <li><a href="in_progress">  <span class="link-text">In Progress</span></a></li>
-            <li><a href="pending">  <span class="link-text">Pending</span></a> 0</span>  </li>
+            <li><a href="pending">  <span class="link-text">Pending</span></a></span>  </li>
         </ul>
 
     </div>

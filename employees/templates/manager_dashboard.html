@@ -1,6 +1,7 @@
 {% load static %}
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,32 +19,13 @@
     {% include 'navbar.html' %}
 
 
+
+
     <div class="main_body">
 
+    
 
-        <div class="statbox_grid">
-
-            <div class="stat_box" id="box1">
-
-                <span class="title">ASSIGNED</span>
-                <span class="number">{{assigned_count}}</span>
-
-            </div>
-            <div class="stat_box" id="box2">
-                <span class="title">COMPLETED</span>
-                <span class="number">{{completed_count}}</span>
-            </div>
-            <div class="stat_box" id="box3">
-                <span class="title">IN PROGRESS</span>
-                <span class="number">{{in_progress_count}}</span>
-            </div>
-            <div class="stat_box" id="box4">
-                <span class="title">PENDING</span>
-                <span class="number">{{pending_count}}</span>
-            </div>
-
-        </div>
-
+        {% include 'stat_box.html' %}
 
         <h1 class="page_heading">{{currentTitle}}</h1>
 
@@ -85,6 +67,7 @@
         {% endif %}
 
 
+
         <div class="tasks">
 
             <button id="createTask">CREATE TASK </button>
@@ -107,7 +90,7 @@
                     {% endif %}
 
 
-                    <div class="details">
+                    <!-- <div class="details"> -->
 
                     {% if task.status == 'assigned' %}
 
@@ -173,7 +156,7 @@
 
                         </form>
 
-                    </div>
+                    <!-- </div> -->
 
                 </div>
 

@@ -14,6 +14,7 @@ urlpatterns = [
     path('manager/manager_operations' ,  employees.views.manager_operations   ),
     path('manager/<str:username>/<str:status>' ,  employees.views.manager   ),
     path('manager/<str:username>/' ,  employees.views.manager   ),
+    # path('manager/<str:username>/' ,  employees.views.manager   ),
     path('signout' ,  views.signout  ),
 ]
 
